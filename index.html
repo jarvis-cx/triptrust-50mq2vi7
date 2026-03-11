@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TripTrust Safety Report — London, UK</title>
+<style>
+  :root {
+    --navy: #1e3a5f;
+    --navy-dark: #152e4d;
+    --navy-light: #2a5280;
+    --accent: #2563eb;
+    --accent-light: #3b82f6;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+    --red: #dc2626;
+    --red-bg: #fef2f2;
+    --red-border: #fca5a5;
+    --orange: #ea580c;
+    --orange-bg: #fff7ed;
+    --orange-border: #fdba74;
+    --amber: #d97706;
+    --amber-bg: #fffbeb;
+    --amber-border: #fcd34d;
+    --green: #16a34a;
+    --green-bg: #f0fdf4;
+    --green-border: #86efac;
+    --emerald: #059669;
+    --emerald-bg: #ecfdf5;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+    --card-shadow-hover: 0 2px 8px rgba(0,0,0,0.1), 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--slate-700);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--slate-900);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .nav-inner {
+    max-width: 1000px; margin: 0 auto; padding: 0 16px;
+    display: flex; align-items: center; gap: 4px;
+    overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; height: 48px;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-brand {
+    font-size: 11px; font-weight: 700; color: var(--slate-400);
+    letter-spacing: 2px; text-transform: uppercase; white-space: nowrap;
+    margin-right: 12px; flex-shrink: 0;
+  }
+  .nav a {
+    color: var(--slate-300); text-decoration: none; font-size: 12px;
+    font-weight: 500; padding: 6px 12px; border-radius: 999px; white-space: nowrap;
+    transition: all 0.15s; flex-shrink: 0;
+  }
+  .nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+
+  .hero {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
+    color: white; padding: 56px 24px 48px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -60%; right: -20%; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1000px; margin: 0 auto; position: relative; }
+  .hero-top { display: flex; align-items: flex-start; gap: 20px; }
+  .hero-flag { font-size: 56px; line-height: 1; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); flex-shrink: 0; }
+  .hero-text { flex: 1; }
+  .hero-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+  .hero h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 4px; }
+  .hero-subtitle { font-size: 18px; color: rgba(255,255,255,0.7); font-weight: 400; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .hero-pill {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px; padding: 6px 16px; font-size: 13px; font-weight: 500;
+    color: rgba(255,255,255,0.85); backdrop-filter: blur(4px);
+  }
+
+  .stats-bar { background: var(--slate-900); border-top: 1px solid rgba(255,255,255,0.08); }
+  .stats-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+  .stat-item { padding: 16px 20px; text-align: center; border-right: 1px solid rgba(255,255,255,0.06); }
+  .stat-item:last-child { border-right: none; }
+  .stat-icon { font-size: 20px; margin-bottom: 4px; }
+  .stat-value { font-size: 15px; font-weight: 700; color: white; }
+  .stat-label { font-size: 11px; color: var(--slate-400); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  .risk-banner {
+    text-align: center; padding: 14px 24px; font-size: 14px;
+    font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .risk-banner.low { background: var(--green); color: white; }
+  .risk-banner.medium { background: var(--amber); color: white; }
+  .risk-banner .risk-sub { font-weight: 400; font-size: 12px; text-transform: none; letter-spacing: 0; opacity: 0.9; margin-top: 4px; display: block; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 32px 16px 48px; }
+
+  .card { background: var(--white); border-radius: 16px; box-shadow: var(--card-shadow); overflow: hidden; margin-bottom: 24px; border: 1px solid var(--slate-100); transition: box-shadow 0.2s; }
+  .card:hover { box-shadow: var(--card-shadow-hover); }
+  .card-header { display: flex; align-items: center; gap: 12px; padding: 20px 28px; border-bottom: 1px solid var(--slate-100); background: var(--slate-50); }
+  .card-header .section-icon { font-size: 22px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--navy); border-radius: 10px; flex-shrink: 0; }
+  .card-header h2 { font-size: 18px; font-weight: 700; color: var(--slate-800); flex: 1; line-height: 1.3; }
+  .card-body { padding: 28px; }
+
+  .badge { display: inline-flex; align-items: center; padding: 4px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+  .badge-low { background: var(--green); color: white; }
+  .badge-medium { background: var(--amber); color: white; }
+  .badge-minimal { background: var(--emerald); color: white; }
+  .badge-high { background: var(--orange); color: white; }
+
+  .alert { border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 14px; line-height: 1.7; border-left: 4px solid; }
+  .alert strong { display: block; margin-bottom: 4px; font-size: 14px; }
+  .alert-success { background: var(--green-bg); border-color: var(--green); color: #166534; }
+  .alert-info { background: #eff6ff; border-color: var(--accent); color: #1e40af; }
+  .alert-amber { background: var(--amber-bg); border-color: var(--amber); color: #92400e; }
+  .alert-warning { background: var(--orange-bg); border-color: var(--orange); color: #9a3412; }
+
+  h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin: 20px 0 10px; padding-top: 4px; }
+  h3:first-child { margin-top: 0; }
+  p { font-size: 14px; line-height: 1.8; margin-bottom: 10px; color: var(--slate-600); }
+  strong { color: var(--slate-800); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  ul.items { list-style: none; }
+  ul.items li { padding: 7px 0 7px 26px; position: relative; font-size: 14px; color: var(--slate-600); line-height: 1.6; }
+  ul.items li::before { content: '•'; position: absolute; left: 8px; color: var(--accent); font-weight: 700; font-size: 16px; }
+  ul.check li::before { content: '✓'; color: var(--green); font-size: 14px; left: 4px; }
+  ul.warn li::before { content: '⚠'; color: var(--amber); font-size: 13px; left: 2px; }
+
+  .info-row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--slate-100); font-size: 14px; align-items: flex-start; }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .label { font-weight: 600; color: var(--slate-700); min-width: 160px; flex-shrink: 0; }
+  .info-row .value { color: var(--slate-600); flex: 1; }
+
+  .risk-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .risk-table th { background: var(--navy); color: white; padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .risk-table td { padding: 12px 16px; border-bottom: 1px solid var(--slate-100); font-size: 14px; vertical-align: middle; color: var(--slate-600); }
+  .risk-table tr:nth-child(even) td { background: var(--slate-50); }
+  .risk-table td:first-child { font-weight: 600; color: var(--slate-800); }
+
+  .risk-list { list-style: none; }
+  .risk-list li { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--slate-100); }
+  .risk-list li:last-child { border-bottom: none; }
+  .risk-num { background: var(--orange); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+  .risk-content { flex: 1; }
+  .risk-content strong { display: block; font-size: 14px; color: var(--slate-800); margin-bottom: 2px; }
+  .risk-content span { font-size: 13px; color: var(--slate-500); line-height: 1.6; }
+
+  .verdict-box { border-radius: 14px; padding: 28px; text-align: center; margin-top: 20px; border: 3px solid; }
+  .verdict-box.success { background: #001a0a; border-color: var(--green); }
+  .verdict-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 8px; font-weight: 600; }
+  .verdict-text { font-size: 32px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+  .verdict-box.success .verdict-text { color: #22c55e; }
+  .verdict-reason { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 12px; line-height: 1.7; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+  .advisory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 12px; }
+  .advisory-card { border-radius: 12px; padding: 20px; text-align: center; border: 2px solid; background: white; }
+  .advisory-card.low { border-color: var(--green); background: var(--green-bg); }
+  .advisory-card.medium { border-color: var(--amber); background: var(--amber-bg); }
+  .advisory-card .country { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--slate-500); margin-bottom: 6px; }
+  .advisory-card .level { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+  .advisory-card.low .level { color: var(--green); }
+  .advisory-card.medium .level { color: var(--amber); }
+  .advisory-card .desc { font-size: 12px; color: var(--slate-600); line-height: 1.5; }
+
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 12px; }
+  .contact-card { background: var(--navy); color: white; border-radius: 12px; padding: 18px; }
+  .contact-card .c-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; margin-bottom: 4px; }
+  .contact-card .c-number { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+  .contact-card .c-desc { font-size: 12px; opacity: 0.7; }
+
+  .hotel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 12px; }
+  .hotel-card { background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 12px; padding: 20px; }
+  .hotel-card h4 { font-size: 15px; color: var(--navy); font-weight: 700; margin-bottom: 2px; }
+  .hotel-card .stars { color: #f59e0b; font-size: 14px; margin-bottom: 8px; }
+  .hotel-card p { font-size: 13px; color: var(--slate-600); margin: 0 0 8px; }
+  .hotel-card .hotel-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .hotel-link { font-size: 12px; padding: 4px 10px; border-radius: 6px; text-decoration: none; font-weight: 600; }
+  .hotel-link.booking { background: #003580; color: white; }
+  .hotel-link.maps { background: #4285f4; color: white; }
+
+  .footer { background: var(--slate-900); color: rgba(255,255,255,0.4); text-align: center; padding: 36px 24px; font-size: 12px; line-height: 1.9; }
+  .footer-logo { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.7); letter-spacing: 1px; margin-bottom: 8px; }
+  .footer a { color: var(--accent-light); text-decoration: none; }
+  .footer-divider { width: 60px; height: 2px; background: rgba(255,255,255,0.1); margin: 16px auto; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 40px 16px 36px; }
+    .hero-top { flex-direction: column; gap: 12px; }
+    .hero-flag { font-size: 44px; }
+    .hero h1 { font-size: 28px; }
+    .card-header { padding: 16px 20px; }
+    .card-body { padding: 20px; }
+    .info-row { flex-direction: column; gap: 2px; }
+    .info-row .label { min-width: unset; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .nav-brand { display: none; }
+  }
+
+  @media print {
+    .nav { display: none !important; }
+    .card { box-shadow: none !important; border: 1px solid #e2e8f0 !important; break-inside: avoid; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">🇬🇧 London, UK</span>
+    <a href="#summary">Summary</a>
+    <a href="#security">Security</a>
+    <a href="#advisories">Advisories</a>
+    <a href="#entry">Entry</a>
+    <a href="#health">Health</a>
+    <a href="#transport">Transport</a>
+    <a href="#money">Money</a>
+    <a href="#accommodation">Stay</a>
+    <a href="#weather">Weather</a>
+    <a href="#culture">Culture &amp; Biz</a>
+    <a href="#emergency">Emergency</a>
+    <a href="#risk-matrix">Risk Matrix</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <span class="hero-flag">🇬🇧</span>
+      <div class="hero-text">
+        <p class="hero-label">Travel Safety Report</p>
+        <h1>London, United Kingdom</h1>
+        <p class="hero-subtitle">Business Travel · 25 Mar – 29 Mar 2026</p>
+        <div class="hero-pills">
+          <span class="hero-pill">📅 4 nights</span>
+          <span class="hero-pill">🛂 British Passport</span>
+          <span class="hero-pill">💼 Business</span>
+          <span class="hero-pill">💎 Mid-to-High Budget</span>
+          <span class="hero-pill">🗓️ Report: 11 March 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KEY STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-icon">📅</div>
+      <div class="stat-value">4 Nights</div>
+      <div class="stat-label">Duration</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">🛂</div>
+      <div class="stat-value">British</div>
+      <div class="stat-label">Passport</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">💼</div>
+      <div class="stat-value">Business</div>
+      <div class="stat-label">Purpose</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">💰</div>
+      <div class="stat-value">Mid-High</div>
+      <div class="stat-label">Budget</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-value"><span class="badge badge-low">LOW</span></div>
+      <div class="stat-label">Risk Level</div>
+    </div>
+  </div>
+</div>
+
+<!-- RISK BANNER -->
+<div class="risk-banner low">
+  ✅ Overall Risk: LOW — Domestic UK Travel
+  <span class="risk-sub">British national travelling in their home country. Normal urban precautions apply. Terrorism threat is Substantial (3/5).</span>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section id="summary">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">📋</div>
+        <h2>Executive Summary</h2>
+        <span class="badge badge-low">Low Risk</span>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-success">
+          <strong>✅ Domestic Travel — Minimal Complexity</strong>
+          As a British national travelling to London, this is domestic travel within your own country. No visa, no entry requirements, no NHS concerns, no currency exchange needed. London is one of the world's most-visited cities and is generally safe for business travel.
+        </div>
+        <p>London is the UK's capital and a global business hub. For a British national on a 4-night business trip in late March 2026, the risk profile is <strong>Low</strong>. The primary concerns are petty crime (pickpocketing in busy areas), the UK's <strong>Substantial</strong> terrorism threat level, and some urban street safety considerations in certain areas at night.</p>
+        <p>Late March in London brings cool, unpredictable spring weather — pack layers. Business infrastructure is world-class: excellent hotels, transport, and connectivity. The pound sterling is your home currency so no forex risk.</p>
+
+        <div class="verdict-box success">
+          <div class="verdict-label">Go / No-Go Assessment</div>
+          <div class="verdict-text">✅ GO</div>
+          <div class="verdict-reason">This is domestic UK travel. No barriers, no advisories against travel. Normal urban awareness and standard business travel precautions are all that's required.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section id="security">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">🔒</div>
+        <h2>Security &amp; Safety</h2>
+        <span class="badge badge-low">Low–Medium</span>
+      </div>
+      <div class="card-body">
+        <h3>Overall Crime Level</h3>
+        <p>London is broadly safe, particularly in central business districts. Violent crime rates are low in areas typically visited by business travellers. The primary risk is opportunistic petty theft.</p>
+
+        <div class="alert alert-amber">
+          <strong>⚠️ UK Terrorism Threat: SUBSTANTIAL</strong>
+          As of March 2026, the UK terrorism threat level is <strong>Substantial</strong> (3rd of 5 levels), meaning an attack is considered likely. The threat is under review following regional geopolitical developments. Remain vigilant in crowded public spaces, transport hubs, and iconic landmarks.
+        </div>
+
+        <h3>Top Safety Risks</h3>
+        <ul class="risk-list">
+          <li>
+            <div class="risk-num">1</div>
+            <div class="risk-content">
+              <strong>Pickpocketing &amp; Phone Theft</strong>
+              <span>Highest risk in crowded areas: <a href="https://www.google.com/maps/search/Oxford+Street+London" target="_blank" rel="noopener">Oxford Street</a>, <a href="https://www.google.com/maps/search/Westminster+London" target="_blank" rel="noopener">Westminster</a>, <a href="https://www.google.com/maps/search/Covent+Garden+London" target="_blank" rel="noopener">Covent Garden</a>, <a href="https://www.google.com/maps/search/London+Bridge+London" target="_blank" rel="noopener">London Bridge</a>. Phone snatching is on the rise — keep your device secured and off the table in restaurants.</span>
+            </div>
+          </li>
+          <li>
+            <div class="risk-num">2</div>
+            <div class="risk-content">
+              <strong>Terrorism</strong>
+              <span>UK terror threat remains Substantial. Stay alert at transport hubs (<a href="https://www.google.com/maps/search/London+Paddington+Station" target="_blank" rel="noopener">Paddington</a>, <a href="https://www.google.com/maps/search/Waterloo+Station+London" target="_blank" rel="noopener">Waterloo</a>, <a href="https://www.google.com/maps/search/Victoria+Station+London" target="_blank" rel="noopener">Victoria</a>), crowded venues, and public events. Follow any official guidance immediately.</span>
+            </div>
+          </li>
+          <li>
+            <div class="risk-num">3</div>
+            <div class="risk-content">
+              <strong>Scams &amp; Overcharging</strong>
+              <span>Common tourist scams include unlicensed minicabs, fake charity collectors, and overpriced restaurant menus in tourist zones. Stick to licensed black cabs or Uber/Bolt.</span>
+            </div>
+          </li>
+          <li>
+            <div class="risk-num">4</div>
+            <div class="risk-content">
+              <strong>Night Safety in Outer Areas</strong>
+              <span>Certain outer London areas (parts of <a href="https://www.google.com/maps/search/Hackney+London" target="_blank" rel="noopener">Hackney</a>, <a href="https://www.google.com/maps/search/Lewisham+London" target="_blank" rel="noopener">Lewisham</a>, <a href="https://www.google.com/maps/search/Peckham+London" target="_blank" rel="noopener">Peckham</a>) have higher crime at night. Central business districts and hotel areas are safe.</span>
+            </div>
+          </li>
+        </ul>
+
+        <h3>Areas Generally Safe for Business Travel</h3>
+        <ul class="items check">
+          <li><a href="https://www.google.com/maps/search/City+of+London" target="_blank" rel="noopener">City of London</a> (financial district) — well-policed, CCTV everywhere</li>
+          <li><a href="https://www.google.com/maps/search/Mayfair+London" target="_blank" rel="noopener">Mayfair</a> &amp; <a href="https://www.google.com/maps/search/Belgravia+London" target="_blank" rel="noopener">Belgravia</a> — upscale, low crime</li>
+          <li><a href="https://www.google.com/maps/search/Canary+Wharf+London" target="_blank" rel="noopener">Canary Wharf</a> — private estate security, well-monitored</li>
+          <li><a href="https://www.google.com/maps/search/Soho+London" target="_blank" rel="noopener">Soho</a> &amp; <a href="https://www.google.com/maps/search/Fitzrovia+London" target="_blank" rel="noopener">Fitzrovia</a> — lively but generally safe; busy at night</li>
+        </ul>
+
+        <h3>Practical Tips</h3>
+        <ul class="items">
+          <li>Keep phone in a front trouser pocket or inside jacket — never on a café table</li>
+          <li>Use contactless/card payment rather than carrying large amounts of cash</li>
+          <li>Be aware of surroundings at ATMs and busy Tube stations</li>
+          <li>Report any suspicious unattended bags — "If you see something, say something"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAVEL ADVISORIES -->
+  <section id="advisories">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">🚨</div>
+        <h2>Travel Advisories</h2>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-success">
+          <strong>✅ No Advisories Against Travel to the UK</strong>
+          No major government issues any advisory against travel to London or mainland UK for standard tourism and business. The UK is a safe, stable democracy with robust rule of law.
+        </div>
+        <div class="advisory-grid">
+          <div class="advisory-card low">
+            <div class="country">🇬🇧 FCDO (UK)</div>
+            <div class="level">N/A — Domestic</div>
+            <div class="desc">No foreign travel advice applies to UK nationals travelling within the UK. Normal life applies.</div>
+          </div>
+          <div class="advisory-card low">
+            <div class="country">🇦🇺 DFAT (Australia)</div>
+            <div class="level">Exercise Normal Safety Precautions</div>
+            <div class="desc">Australia advises standard precautions for the UK. No elevated advisory.</div>
+          </div>
+          <div class="advisory-card medium">
+            <div class="country">🇺🇸 US State Dept</div>
+            <div class="level">Level 2 — Exercise Increased Caution</div>
+            <div class="desc">Due to terrorism risk. This is a standard level for major European capitals, not a specific threat.</div>
+          </div>
+        </div>
+        <p style="margin-top:16px;font-size:13px;color:var(--slate-500);">For British nationals, no travel advisory is relevant for domestic UK travel. Sources: <a href="https://www.gov.uk/foreign-travel-advice" target="_blank" rel="noopener">FCDO</a> · <a href="https://www.smartraveller.gov.au" target="_blank" rel="noopener">Smartraveller</a> · <a href="https://travel.state.gov" target="_blank" rel="noopener">US State Dept</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTRY REQUIREMENTS -->
+  <section id="entry">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">🛂</div>
+        <h2>Entry Requirements</h2>
+        <span class="badge badge-minimal">No Requirements</span>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-success">
+          <strong>✅ British National — No Entry Requirements</strong>
+          As a British citizen travelling within the United Kingdom, no passport, visa, or any documentation is required. You have the full right to reside and travel freely.
+        </div>
+
+        <div class="info-row">
+          <span class="label">Visa Required</span>
+          <span class="value">❌ No — British national, domestic travel</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Passport Required</span>
+          <span class="value">No (but carry a photo ID — driver's licence or passport for hotel check-in and flights if applicable)</span>
+        </div>
+        <div class="info-row">
+          <span class="label">ETIAS / ETA</span>
+          <span class="value">Not applicable for domestic UK travel</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Travel Insurance</span>
+          <span class="value">NHS covers healthcare. Travel insurance recommended for business trip cancellations, lost luggage, and liability. Check corporate travel policy.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Customs</span>
+          <span class="value">No customs declarations for UK-to-UK travel. Prohibited items: offensive weapons, illegal drugs. Check airline rules for carry-on if flying.</span>
+        </div>
+
+        <h3>If Flying Into London</h3>
+        <p>If arriving from outside the UK (e.g. returning from abroad), standard UK Border Force re-entry applies. British nationals use e-gates for fast clearance. No visa or pre-entry documentation needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HEALTH & MEDICAL -->
+  <section id="health">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">🏥</div>
+        <h2>Health &amp; Medical</h2>
+        <span class="badge badge-minimal">Minimal Concern</span>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-success">
+          <strong>✅ NHS Coverage — Full Healthcare Access</strong>
+          As a British national you have full NHS access. London has world-class hospitals, A&amp;E departments, and medical facilities available 24/7.
+        </div>
+
+        <h3>Vaccinations</h3>
+        <ul class="items check">
+          <li>No vaccinations required for domestic UK travel</li>
+          <li>Standard UK routine vaccinations (MMR, tetanus, flu) should be up to date</li>
+          <li>No tropical disease risk in London</li>
+        </ul>
+
+        <h3>Medical Facilities</h3>
+        <ul class="items check">
+          <li><a href="https://www.google.com/maps/search/St+Thomas+Hospital+London" target="_blank" rel="noopener">St Thomas' Hospital</a> — major NHS teaching hospital, South Bank (opposite Parliament)</li>
+          <li><a href="https://www.google.com/maps/search/University+College+London+Hospital" target="_blank" rel="noopener">University College London Hospital</a> — top NHS hospital, central London</li>
+          <li><a href="https://www.google.com/maps/search/Barts+Health+NHS+Trust+London" target="_blank" rel="noopener">Barts Health NHS</a> — City of London area</li>
+          <li>Boots, LloydsPharmacy, and Superdrug pharmacies throughout central London for minor ailments</li>
+        </ul>
+
+        <h3>Food &amp; Water</h3>
+        <ul class="items check">
+          <li>Tap water is safe and drinkable throughout London</li>
+          <li>Food hygiene standards are among the highest in the world (FSA regulated)</li>
+          <li>No food/water-borne illness concerns for standard restaurants and hotels</li>
+        </ul>
+
+        <h3>Business Travel Tips</h3>
+        <ul class="items">
+          <li>Carry any prescription medications in original packaging (for airline security)</li>
+          <li>Business travel insurance recommended for trip cancellation/disruption cover</li>
+          <li>GP services available via NHS 111 (call or online) if needed</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSPORT -->
+  <section id="transport">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">🚇</div>
+        <h2>Getting Around London</h2>
+      </div>
+      <div class="card-body">
+        <h3>From Heathrow Airport (LHR)</h3>
+        <div class="info-row">
+          <span class="label">✈️ Elizabeth Line</span>
+          <span class="value">Best option. Direct from Heathrow Terminals 2/3/4/5 to central London (Paddington, Bond Street, Liverpool Street). ~30–45 mins. ~£12–15. Runs every 10 mins. Contactless payment accepted.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">🚄 Heathrow Express</span>
+          <span class="value">Premium express to <a href="https://www.google.com/maps/search/Paddington+Station+London" target="_blank" rel="noopener">Paddington Station</a>. 15 mins. ~£25–37 (book in advance online for discounts). Business class available.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">🚇 Piccadilly Line</span>
+          <span class="value">Budget option. Direct Tube service to central London. ~50–60 mins. ~£5–6 with Oyster/contactless. Runs 24/7 at weekends.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">🚕 Black Cab / Minicab</span>
+          <span class="value">Door-to-door convenience. £50–80 to central London depending on traffic. Use licensed black cabs or pre-booked Uber/Bolt — never unlicensed minicabs outside the terminal.</span>
+        </div>
+
+        <h3>From Gatwick Airport (LGW)</h3>
+        <div class="info-row">
+          <span class="label">🚄 Gatwick Express</span>
+          <span class="value">Non-stop to <a href="https://www.google.com/maps/search/Victoria+Station+London" target="_blank" rel="noopener">Victoria Station</a>. 30 mins. ~£18–22. Every 15–30 mins. Most convenient for Mayfair/West End hotels.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">🚂 Southern / Thameslink</span>
+          <span class="value">Cheaper train services to <a href="https://www.google.com/maps/search/London+Bridge+Station" target="_blank" rel="noopener">London Bridge</a>, <a href="https://www.google.com/maps/search/Blackfriars+Station+London" target="_blank" rel="noopener">Blackfriars</a>, <a href="https://www.google.com/maps/search/St+Pancras+Station+London" target="_blank" rel="noopener">St Pancras</a>. ~35–45 mins. ~£10–17.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">🚕 Taxi</span>
+          <span class="value">~45–90 mins depending on traffic. £80–120+. Not recommended unless essential — train is faster and cheaper.</span>
+        </div>
+
+        <h3>Getting Around the City</h3>
+        <ul class="items check">
+          <li><strong>London Underground (Tube)</strong> — Fast, reliable, comprehensive. Use contactless bank card or Oyster card. Daily/weekly price caps apply automatically.</li>
+          <li><strong>Elizabeth Line (Crossrail)</strong> — Modern, spacious, excellent Wi-Fi. Connects Heathrow ↔ Paddington ↔ City ↔ Canary Wharf ↔ Stratford.</li>
+          <li><strong>Black Cabs</strong> — Hail anywhere in central London or book via <a href="https://www.google.com/maps/search/Gett+taxi+London" target="_blank" rel="noopener">Gett</a> app. Fully licensed, metered, safe 24/7.</li>
+          <li><strong>Uber / Bolt</strong> — Widely available, competitive pricing. Always verify driver details before getting in.</li>
+          <li><strong>Santander Cycles (Boris Bikes)</strong> — Docking stations everywhere in central London. £1.65/30 mins. Great for short daytime trips.</li>
+          <li><strong>Walking</strong> — Most City and West End meetings are walkable. Distances often shorter than they appear on the Tube map.</li>
+        </ul>
+
+        <h3>Business District Connections</h3>
+        <div class="info-row">
+          <span class="label"><a href="https://www.google.com/maps/search/City+of+London+financial+district" target="_blank" rel="noopener">City of London</a></span>
+          <span class="value">Bank, Cannon Street, Moorgate, Liverpool Street stations. Elizabeth Line and multiple Tube lines.</span>
+        </div>
+        <div class="info-row">
+          <span class="label"><a href="https://www.google.com/maps/search/Canary+Wharf+business+district+London" target="_blank" rel="noopener">Canary Wharf</a></span>
+          <span class="value">Jubilee Line or Elizabeth Line (direct from Heathrow/Paddington). DLR also serves the area.</span>
+        </div>
+        <div class="info-row">
+          <span class="label"><a href="https://www.google.com/maps/search/Mayfair+London" target="_blank" rel="noopener">Mayfair / West End</a></span>
+          <span class="value">Bond Street, Green Park, Oxford Circus stations. Easy access from Heathrow via Elizabeth Line or Tube.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONEY -->
+  <section id="money">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">💷</div>
+        <h2>Money &amp; Budget</h2>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-success">
+          <strong>✅ Home Currency — No Forex Needed</strong>
+          You're paying in British Pounds Sterling (£). No currency exchange required.
+        </div>
+
+        <div class="info-row">
+          <span class="label">Currency</span>
+          <span class="value">British Pound Sterling (GBP, £). Divided into 100 pence (p).</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Card Payments</span>
+          <span class="value">Contactless (Visa, Mastercard, Amex) accepted almost universally, including buses, Tube, taxis, cafés, and restaurants. Amex accepted at most hotels and upmarket restaurants.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Cash</span>
+          <span class="value">Less commonly needed. Carry £50–100 for incidentals. ATMs widespread — Barclays, NatWest, HSBC, Lloyds branches throughout the City.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Tipping Culture</span>
+          <span class="value">10–12.5% at restaurants (not mandatory but expected). Black cabs: round up or add 10%. Hotels: not mandatory but £2–5 for porters/housekeeping appreciated. Bars: not required.</span>
+        </div>
+
+        <h3>Budget Estimates (Mid-to-High / "Let's Have Fun")</h3>
+        <table class="risk-table">
+          <thead>
+            <tr><th>Category</th><th>Per Night / Per Day</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Hotel (4★–5★)</td><td>£200–£450/night</td><td>City, Mayfair, or Canary Wharf</td></tr>
+            <tr><td>Business Lunch</td><td>£40–80/person</td><td>City restaurants, business dining</td></tr>
+            <tr><td>Business Dinner</td><td>£80–150/person</td><td>Fine dining, incl. wine</td></tr>
+            <tr><td>Transport (daily)</td><td>£10–25</td><td>Tube daily cap ~£10; taxis ~£15–25/trip</td></tr>
+            <tr><td>Airport Transfer</td><td>£15–37 (train) or £60–80 (taxi)</td><td>Elizabeth Line recommended</td></tr>
+            <tr><td>Coffee / Breakfast</td><td>£5–15</td><td>Hotel breakfast often included</td></tr>
+            <tr><td>Evening drinks</td><td>£20–60</td><td>West End/City bar prices £7–15/drink</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCOMMODATION -->
+  <section id="accommodation">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">🏨</div>
+        <h2>Accommodation — Business Hotels</h2>
+      </div>
+      <div class="card-body">
+        <p>London offers exceptional business hotel options. For a mid-to-high budget, the following are excellent choices across the key business districts. All are well-connected to the City, Canary Wharf, and West End.</p>
+
+        <h3>City of London / Shoreditch</h3>
+        <div class="hotel-grid">
+          <div class="hotel-card">
+            <h4><a href="https://www.booking.com/search.html?ss=The+Ned+London" target="_blank" rel="noopener">The Ned London</a></h4>
+            <div class="stars">★★★★★</div>
+            <p>Iconic 1920s banking hall conversion in the heart of the City. Nine restaurants, rooftop pool, members club feel. Steps from <a href="https://www.google.com/maps/search/Bank+station+London" target="_blank" rel="noopener">Bank station</a>.</p>
+            <p><strong>~£250–450/night</strong></p>
+            <div class="hotel-links">
+              <a href="https://www.booking.com/search.html?ss=The+Ned+London" class="hotel-link booking" target="_blank" rel="noopener">Book →</a>
+              <a href="https://www.google.com/maps/search/The+Ned+London+City" class="hotel-link maps" target="_blank" rel="noopener">Maps</a>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <h4><a href="https://www.booking.com/search.html?ss=Andaz+London+Liverpool+Street" target="_blank" rel="noopener">Andaz London Liverpool Street</a></h4>
+            <div class="stars">★★★★★</div>
+            <p>Hyatt's design-led property at <a href="https://www.google.com/maps/search/Liverpool+Street+Station+London" target="_blank" rel="noopener">Liverpool Street</a>. Buzzing bar scene, slick rooms, great for City/Tech City meetings.</p>
+            <p><strong>~£220–380/night</strong></p>
+            <div class="hotel-links">
+              <a href="https://www.booking.com/search.html?ss=Andaz+London+Liverpool+Street" class="hotel-link booking" target="_blank" rel="noopener">Book →</a>
+              <a href="https://www.google.com/maps/search/Andaz+Hotel+Liverpool+Street+London" class="hotel-link maps" target="_blank" rel="noopener">Maps</a>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <h4><a href="https://www.booking.com/search.html?ss=Four+Seasons+Hotel+London+at+Ten+Trinity+Square" target="_blank" rel="noopener">Four Seasons Ten Trinity Square</a></h4>
+            <div class="stars">★★★★★</div>
+            <p>Ultra-luxury in a landmark Grade II listed building near <a href="https://www.google.com/maps/search/Tower+of+London" target="_blank" rel="noopener">Tower of London</a>. Exquisite dining, spa, top-tier service.</p>
+            <p><strong>~£450–800/night</strong></p>
+            <div class="hotel-links">
+              <a href="https://www.booking.com/search.html?ss=Four+Seasons+Ten+Trinity+Square+London" class="hotel-link booking" target="_blank" rel="noopener">Book →</a>
+              <a href="https://www.google.com/maps/search/Four+Seasons+Ten+Trinity+Square+London" class="hotel-link maps" target="_blank" rel="noopener">Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <h3>Mayfair / West End</h3>
+        <div class="hotel-grid">
+          <div class="hotel-card">
+            <h4><a href="https://www.booking.com/search.html?ss=Claridges+Hotel+London+Mayfair" target="_blank" rel="noopener">Claridge's</a></h4>
+            <div class="stars">★★★★★</div>
+            <p>The quintessential London business hotel. Art deco grandeur, legendary service, Mayfair location. The power-lunch venue of choice for decades.</p>
+            <p><strong>~£450–900/night</strong></p>
+            <div class="hotel-links">
+              <a href="https://www.booking.com/search.html?ss=Claridges+Hotel+Mayfair+London" class="hotel-link booking" target="_blank" rel="noopener">Book →</a>
+              <a href="https://www.google.com/maps/search/Claridges+Hotel+Brook+Street+London" class="hotel-link maps" target="_blank" rel="noopener">Maps</a>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <h4><a href="https://www.booking.com/search.html?ss=InterContinental+London+Park+Lane" target="_blank" rel="noopener">InterContinental London Park Lane</a></h4>
+            <div class="stars">★★★★★</div>
+            <p>Prime location overlooking <a href="https://www.google.com/maps/search/Hyde+Park+London" target="_blank" rel="noopener">Hyde Park</a>. Excellent conference facilities, steps from <a href="https://www.google.com/maps/search/Green+Park+Station+London" target="_blank" rel="noopener">Green Park station</a> for City access.</p>
+            <p><strong>~£280–500/night</strong></p>
+            <div class="hotel-links">
+              <a href="https://www.booking.com/search.html?ss=InterContinental+London+Park+Lane" class="hotel-link booking" target="_blank" rel="noopener">Book →</a>
+              <a href="https://www.google.com/maps/search/InterContinental+Park+Lane+London" class="hotel-link maps" target="_blank" rel="noopener">Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <h3>Canary Wharf</h3>
+        <div class="hotel-grid">
+          <div class="hotel-card">
+            <h4><a href="https://www.booking.com/search.html?ss=Dorsett+Alpha+Square+Canary+Wharf+London" target="_blank" rel="noopener">Dorsett Alpha Square</a></h4>
+            <div class="stars">★★★★</div>
+            <p>New 2025 opening at <a href="https://www.google.com/maps/search/Canary+Wharf+London" target="_blank" rel="noopener">Canary Wharf</a>. Modern, smart, walkable to all major Canary Wharf offices. Elizabeth Line access to City/Heathrow.</p>
+            <p><strong>~£180–300/night</strong></p>
+            <div class="hotel-links">
+              <a href="https://www.booking.com/search.html?ss=Dorsett+Alpha+Square+Canary+Wharf" class="hotel-link booking" target="_blank" rel="noopener">Book →</a>
+              <a href="https://www.google.com/maps/search/Dorsett+Alpha+Square+Canary+Wharf+London" class="hotel-link maps" target="_blank" rel="noopener">Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <h3>Safe Neighbourhoods for Business Stays</h3>
+        <ul class="items check">
+          <li><a href="https://www.google.com/maps/search/Mayfair+London" target="_blank" rel="noopener">Mayfair</a> — Prestigious, walkable to many corporate offices and private members clubs</li>
+          <li><a href="https://www.google.com/maps/search/City+of+London+EC2" target="_blank" rel="noopener">City of London (EC1–EC4)</a> — Financial district. Quieter at weekends but very convenient for mid-week business.</li>
+          <li><a href="https://www.google.com/maps/search/Canary+Wharf+London" target="_blank" rel="noopener">Canary Wharf / Docklands</a> — Corporate hub, well-managed estate, safe day and night</li>
+          <li><a href="https://www.google.com/maps/search/Marylebone+London" target="_blank" rel="noopener">Marylebone</a> — Quieter, upscale, excellent for West End meetings without the Oxford Street chaos</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEATHER -->
+  <section id="weather">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">🌤️</div>
+        <h2>Weather — Late March 2026</h2>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-amber">
+          <strong>⚠️ Unpredictable Spring Weather — Pack Layers</strong>
+          Late March in London is transitional spring — could be crisp and sunny, could be grey and rainy, possibly both in the same day. The British weather is famously unpredictable.
+        </div>
+
+        <div class="info-row">
+          <span class="label">Temperature Range</span>
+          <span class="value">Daytime: 8–13°C (46–55°F). Nights: 3–7°C (37–45°F). Occasional warmer days up to 15°C.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Rainfall</span>
+          <span class="value">Moderate. March averages 8–10 rainy days. Light rain and drizzle more common than heavy showers. Always carry a compact umbrella.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Daylight</span>
+          <span class="value">Clocks go forward at end of March (BST). By 25–29 March, ~12 hours of daylight. Sunrise ~6:30am, sunset ~7:15pm.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">UV Index</span>
+          <span class="value">Low (1–2). No sun protection needed beyond standard care.</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Wind</span>
+          <span class="value">Moderate westerly winds typical. Can feel colder than the temperature suggests. A wind-resistant outer layer is helpful.</span>
+        </div>
+
+        <h3>What to Pack</h3>
+        <ul class="items check">
+          <li>Business suit or smart smart-casual attire appropriate for client meetings</li>
+          <li>A quality overcoat or trench coat (essential for London weather)</li>
+          <li>Compact fold-up umbrella — keep in your briefcase/bag at all times</li>
+          <li>Layering pieces: fleece mid-layer or light jumper</li>
+          <li>Comfortable shoes suitable for City walking (cobblestones around historic areas)</li>
+          <li>No need for heavy winter gear — but a light scarf won't go amiss for evening outings</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CULTURE & BUSINESS ETIQUETTE -->
+  <section id="culture">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">🤝</div>
+        <h2>Culture &amp; Business Etiquette</h2>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-info">
+          <strong>ℹ️ You Know This Culture</strong>
+          As a British national, you're operating in your home business culture. The below is a reminder of key norms — particularly useful if you're hosting international guests or attending formal City institutions.
+        </div>
+
+        <h3>Core Business Norms</h3>
+        <ul class="items check">
+          <li><strong>Punctuality is paramount.</strong> Being late to a meeting is a serious faux pas. Arriving 5 minutes early is standard. If running late, always call ahead.</li>
+          <li><strong>Formality first.</strong> Address people as Mr/Mrs/Ms until invited to use first names — particularly in the City, legal, and financial sectors.</li>
+          <li><strong>Understatement and indirectness.</strong> "That's quite interesting" often means disagreement. Listen between the lines. Direct confrontation is considered impolite.</li>
+          <li><strong>The firm handshake</strong> remains standard for first meetings. Eye contact is important. Excessive displays of enthusiasm can be read as insincere.</li>
+          <li><strong>Dress code:</strong> City and financial services — formal (dark suit, tie for senior meetings). Tech/creative sectors — smart-casual is increasingly the norm. Check the sector before dressing down.</li>
+        </ul>
+
+        <h3>Business Dining</h3>
+        <ul class="items check">
+          <li><strong>Business lunches</strong> are common in the City. <a href="https://www.google.com/maps/search/The+Ivy+City+Garden+London" target="_blank" rel="noopener">The Ivy City Garden</a>, <a href="https://www.google.com/maps/search/Hawksmoor+Guildhall+London" target="_blank" rel="noopener">Hawksmoor Guildhall</a>, and <a href="https://www.google.com/maps/search/Boisdale+of+Bishopsgate+London" target="_blank" rel="noopener">Boisdale of Bishopsgate</a> are City staples.</li>
+          <li>For Mayfair/West End dining: <a href="https://www.google.com/maps/search/Scotts+Restaurant+Mayfair+London" target="_blank" rel="noopener">Scott's</a>, <a href="https://www.google.com/maps/search/Sexy+Fish+London+Mayfair" target="_blank" rel="noopener">Sexy Fish</a>, and <a href="https://www.google.com/maps/search/The+Ritz+Restaurant+London" target="_blank" rel="noopener">The Ritz Restaurant</a> for special occasions.</li>
+          <li>The host pays at business meals. Do not split bills in client entertainment — always offer to pay as a sign of hospitality.</li>
+          <li>Wine is customary at business dinners. It's fine to drink moderately. Non-alcoholic options are completely accepted and increasingly common.</li>
+          <li>The "pub lunch" is a legitimate business meeting format for informal discussions.</li>
+        </ul>
+
+        <h3>London-Specific Tips</h3>
+        <ul class="items">
+          <li>Stand on the <strong>right</strong> side of escalators — the left is for walking. Violating this is a serious social crime on the Tube.</li>
+          <li>Queue culture is real. Jumping a queue will be met with cold stares and passive-aggressive tutting.</li>
+          <li>Small talk: weather, football (know which team your counterpart follows), and light current events. Avoid politics and Brexit in business settings.</li>
+          <li>Private members clubs (<a href="https://www.google.com/maps/search/The+Ivy+Club+London+West+Street" target="_blank" rel="noopener">The Ivy Club</a>, <a href="https://www.google.com/maps/search/Soho+House+Dean+Street+London" target="_blank" rel="noopener">Soho House</a>, <a href="https://www.google.com/maps/search/Annabels+Berkeley+Square+London" target="_blank" rel="noopener">Annabel's</a>) are common entertainment venues for senior client meetings — smart dress required.</li>
+        </ul>
+
+        <h3>General Social Rules</h3>
+        <ul class="items check">
+          <li>Alcohol is freely available but excessive public drunkenness is frowned upon — particularly in professional settings</li>
+          <li>Photography: generally fine in public. Avoid photographing police operations or military installations.</li>
+          <li>No restrictions on dress code in public (though dress for the weather and the meeting)</li>
+          <li>Mobile phones: acceptable in use but put away during face-to-face meetings — keep on silent</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMERGENCY CONTACTS -->
+  <section id="emergency">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">🆘</div>
+        <h2>Emergency Contacts</h2>
+      </div>
+      <div class="card-body">
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="c-label">Emergency (All)</div>
+            <div class="c-number">999</div>
+            <div class="c-desc">Police, Fire, Ambulance. Only for genuine emergencies.</div>
+          </div>
+          <div class="contact-card">
+            <div class="c-label">Non-Emergency Police</div>
+            <div class="c-number">101</div>
+            <div class="c-desc">Metropolitan Police non-emergency line.</div>
+          </div>
+          <div class="contact-card">
+            <div class="c-label">NHS 111</div>
+            <div class="c-number">111</div>
+            <div class="c-desc">Medical advice, urgent but non-emergency health concerns. 24/7.</div>
+          </div>
+          <div class="contact-card">
+            <div class="c-label">Anti-Terrorism</div>
+            <div class="c-number">0800 789 321</div>
+            <div class="c-desc">Counter Terrorism Hotline. Report suspicious activity (confidential).</div>
+          </div>
+          <div class="contact-card">
+            <div class="c-label">City of London Police</div>
+            <div class="c-number">020 7601 2222</div>
+            <div class="c-desc">Dedicated force for the Square Mile business district.</div>
+          </div>
+          <div class="contact-card">
+            <div class="c-label">TfL (Transport)</div>
+            <div class="c-number">0343 222 1234</div>
+            <div class="c-desc">London transport enquiries, lost property, disruptions.</div>
+          </div>
+        </div>
+
+        <h3>Major Hospitals Near Business Districts</h3>
+        <ul class="items">
+          <li><a href="https://www.google.com/maps/search/Barts+Hospital+City+of+London" target="_blank" rel="noopener">Barts Hospital (NHS)</a> — City of London. Nearest major A&amp;E to the Square Mile.</li>
+          <li><a href="https://www.google.com/maps/search/St+Thomas+Hospital+London+Westminster" target="_blank" rel="noopener">St Thomas' Hospital</a> — Westminster, South Bank. Major NHS teaching hospital.</li>
+          <li><a href="https://www.google.com/maps/search/Royal+London+Hospital+Whitechapel" target="_blank" rel="noopener">Royal London Hospital</a> — Whitechapel (close to City/Canary Wharf). Major trauma centre.</li>
+          <li><a href="https://www.google.com/maps/search/London+Clinic+Harley+Street" target="_blank" rel="noopener">The London Clinic</a> — Private hospital, Harley Street. Excellent for insured business travellers needing fast-track treatment.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISK MATRIX -->
+  <section id="risk-matrix">
+    <div class="card">
+      <div class="card-header">
+        <div class="section-icon">📊</div>
+        <h2>Risk Matrix</h2>
+      </div>
+      <div class="card-body">
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Risk Category</th>
+              <th>Level</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Entry &amp; Visa</td>
+              <td><span class="badge badge-minimal">None</span></td>
+              <td>British national — domestic travel, no requirements</td>
+            </tr>
+            <tr>
+              <td>Overall Crime</td>
+              <td><span class="badge badge-low">Low</span></td>
+              <td>Low in business districts; petty theft in tourist areas</td>
+            </tr>
+            <tr>
+              <td>Violent Crime</td>
+              <td><span class="badge badge-low">Low</span></td>
+              <td>Low in central business areas; higher in some outer zones at night</td>
+            </tr>
+            <tr>
+              <td>Petty Theft / Pickpockets</td>
+              <td><span class="badge badge-medium">Medium</span></td>
+              <td>Real risk in Oxford Street, Westminster, tourist zones</td>
+            </tr>
+            <tr>
+              <td>Terrorism</td>
+              <td><span class="badge badge-medium">Medium</span></td>
+              <td>UK threat level: Substantial (3/5). Under review March 2026.</td>
+            </tr>
+            <tr>
+              <td>Civil Unrest</td>
+              <td><span class="badge badge-low">Low</span></td>
+              <td>Protests occur but rarely disrupt normal business operations</td>
+            </tr>
+            <tr>
+              <td>Health Risks</td>
+              <td><span class="badge badge-minimal">Minimal</span></td>
+              <td>NHS coverage, world-class hospitals, safe food and water</td>
+            </tr>
+            <tr>
+              <td>Transport Safety</td>
+              <td><span class="badge badge-low">Low</span></td>
+              <td>Excellent infrastructure; avoid unlicensed minicabs</td>
+            </tr>
+            <tr>
+              <td>Weather Risk</td>
+              <td><span class="badge badge-low">Low</span></td>
+              <td>Cool and variable; pack accordingly, no severe weather expected</td>
+            </tr>
+            <tr>
+              <td>Scams</td>
+              <td><span class="badge badge-low">Low</span></td>
+              <td>Unlicensed cabs, charity scams, tourist menus; standard vigilance</td>
+            </tr>
+            <tr>
+              <td>Natural Disasters</td>
+              <td><span class="badge badge-minimal">Minimal</span></td>
+              <td>No earthquake, tsunami, or tropical weather risk</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">TripTrust Travel Safety Intelligence</div>
+  <p>Report generated: 11 March 2026 · Destination: London, UK · Passport: British</p>
+  <p>Travel Dates: 25 March – 29 March 2026 · Purpose: Business · Duration: 4 nights</p>
+  <div class="footer-divider"></div>
+  <p>This report is based on publicly available information from FCDO, US State Department, Metropolitan Police, NHS, and open-source intelligence as of the report date. Situations can change rapidly — always check the latest advisories before travel.</p>
+  <p style="margin-top:8px;">This report does not constitute legal or professional advice. As domestic UK travel, standard advice applies — if in doubt, call 999 for emergencies or 101 for non-urgent police matters.</p>
+  <p style="margin-top:12px;"><a href="https://triptrust.co">triptrust.co</a> · Powered by AI · Verified by Humans</p>
+</div>
+
+</body>
+</html>
